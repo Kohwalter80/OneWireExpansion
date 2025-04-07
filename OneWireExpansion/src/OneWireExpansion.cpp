@@ -1,6 +1,6 @@
 #include "OneWireExpansion.h"
 
-OneWireExpansion::OneWireExpansion(int _pino) {
+OneWireExpansion::OneWireExpansion(int pino) {
   _pino = pino;
   pinMode(_pino, OUTPUT);
   digitalWrite(_pino, 1);
@@ -8,15 +8,15 @@ OneWireExpansion::OneWireExpansion(int _pino) {
 }
 
 void OneWireExpansion::resetar() {
-  digitalWrite(pino, 0);
+  digitalWrite(_pino, 0);
   delayMicroseconds(350);
-  digitalWrite(pino, 1);
+  digitalWrite(_pino, 1);
   delayMicroseconds(100);
 }
 
 void OneWireExpansion::enviarByte(uint8_t b, bool LSF = true) {
-  digitalWrite(pino, 0);
-  digitalWrite(pino, 1);
+  digitalWrite(_pino, 0);
+  digitalWrite(_pino, 1);
   byte tempos[14], cont, bt;
   bool ba = true;
   bool bit, pb;
@@ -39,9 +39,9 @@ void OneWireExpansion::enviarByte(uint8_t b, bool LSF = true) {
     ba = bit;
   }
   for (cont = 0; cont < 7; cont++) {
-    digitalWrite(pino, 0);
+    digitalWrite(_pino, 0);
     delayMicroseconds(tempos[2 * cont]);
-    digitalWrite(pino, 1);
+    digitalWrite(_pino, 1);
     delayMicroseconds(tempos[2 * cont + 1]);
   }
   delayMicroseconds(300);
